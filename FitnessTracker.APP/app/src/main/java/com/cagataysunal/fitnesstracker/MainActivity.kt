@@ -1,15 +1,26 @@
 package com.cagataysunal.fitnesstracker
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import com.cagataysunal.fitnesstracker.ui.theme.FitnessTrackerTheme
 
@@ -19,29 +30,38 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FitnessTrackerTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                LoginScreen()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun LoginScreen(modifier: Modifier = Modifier) {
+    Scaffold(modifier = modifier) { innerPadding ->
+        Column(
+            modifier = Modifier.padding(innerPadding).fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text("Welcome", style = MaterialTheme.typography.displaySmall)
+            OutlinedTextField(
+                state = rememberTextFieldState(initialText = ""),
+                label = { Text("Login") }
+            )
+            OutlinedTextField(
+                state = rememberTextFieldState(initialText = ""),
+                label = { Text("Password") }
+            )
+            Button(onClick = {  }) {
+                Text("Login")
+            }
+        }
+    }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
-fun GreetingPreview() {
-    FitnessTrackerTheme {
-        Greeting("Android")
-    }
+private fun LoginScreenPreview() {
+    LoginScreen()
 }
