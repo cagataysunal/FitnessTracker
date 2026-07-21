@@ -9,16 +9,16 @@ import retrofit2.converter.kotlinx.serialization.asConverterFactory
 object FitnessApi {
     private val json = Json { ignoreUnknownKeys = true }
 
+    private const val CONTENT_TYPE = "application/json; charset=utf-8"
+
     private val retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(Constants.URL)
             .addConverterFactory(
-                Json.asConverterFactory(
-                    "application/json; charset=utf-8".toMediaType()
-                )
+                json.asConverterFactory(CONTENT_TYPE.toMediaType())
             )
             .build()
     }
 
-    val service = retrofit.create(FitnessService::class.java)
+    val service: FitnessService = retrofit.create(FitnessService::class.java)
 }
